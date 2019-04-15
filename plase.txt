@@ -1,0 +1,8 @@
+Matti	Meikalainen Matti Meikalainen, Kossu Koskenkorce, Eppu Normaali
+Ville	Virtanen  Ville Virtanen, Riski Asteriski
+Lol1	Ville Virtanen, Kossu Koskenkorce
+Lol2	asd
+Lol3	
+Lol4	Lol1
+gg1	gg2
+gg2	lol1
