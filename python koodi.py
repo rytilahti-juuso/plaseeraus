@@ -9,9 +9,30 @@ import os
 
 os.chdir(r'C:\Users\The Risk Chief\Documents\GitHub\plaseeraus')
 
-column_names = ["name", "friends"]
+column_names = ["name", "gender", "friends"]
 train_data = pd.read_csv('plase.txt', delimiter= "\t", names = column_names)
 friends_filled = train_data['friends'].fillna("Dummy_Value").values
+names = train_data['name'].fillna("Dummy_Value").values
+
+plase_score = []
+for i in range(len(names)):
+    print(i)
+    plase_score.append(100)
+#    boy girl boy girls score affecting
+    if(i%2 == 0):
+        if(train_data["gender"][i]== 0):
+            plase_score[i] = plase_score[i]-20
+    friends_filled[i] = friends_filled[i].lower()
+    friends_filled[i] = re.sub(r'[\,]+\s', ',', friends_filled[i])
+    friends_filled[i] = re.sub(r'^\s','', friends_filled[i])
+
+ 
+tokenizer = Tokenizer(split=",")
+tokenizer.fit_on_texts(names)
+sequences = tokenizer.texts_to_sequences(names)
+
+word2idx = tokenizer.word_index
+print('Found %s unique tokens.' % len(word2idx))
 
 # Text preprocessing
 
