@@ -24,7 +24,7 @@ def generate_table_group(dummy_participant_count):
                 table_group.append(random.randint(0,dummy_participant_count))
     return table_group
 
-# one element contains(name, table_group, gender)
+# one element contains(name, table_group, gender, boolean isAlreadySorted)
 def generate_all_dummy_data():    
     all_data = []
     dummy_participant_count = 100
@@ -37,6 +37,7 @@ def generate_all_dummy_data():
         person_data.append(table_group)
     #    persons gender
         person_data.append(random.randint(0,1))
+        person_data.append(False)
         all_data.append(person_data)
         print(i)
     return all_data
@@ -46,7 +47,11 @@ def indexes_of_table_group(all_data, size_of_table_group):
     items_indexes = []
     for i in range(0, len(all_data)):
         if(len(all_data[i][1])== size_of_table_group-1):
+            
+#            if(all_data[i][3] == False):       
             items_indexes.append(i)
+#                all_data[i][3] = True
+            
     return items_indexes 
 
 def sort_data_by_table_company_size(all_data):
@@ -64,10 +69,31 @@ def sort_data_by_table_company_size(all_data):
     for i in range(len(group_of_1)):
         all_data_sorted.append(all_data[group_of_1[i]])
     return all_data_sorted
+
+def create_final_order_table(all_data_sorted_by_size):
+    final_order = []
+    for i in range(0, len(all_data_sorted_by_size)):
+        if(all_data_sorted_by_size[i][3] == False):
+            final_order.append(all_data_sorted_by_size[i])
+            all_data_sorted_by_size[i][3] = True
+#            print("lol")
+            if(all_data_sorted_by_size[i][1]):
+    #            Go through wanted table company
+                for a in range(0, len(all_data_sorted_by_size[i][1])):
+                    wanted_index = all_data_sorted_by_size[i][1][a]
+                    print("this is inside for loop", wanted_index) 
+                    all_data_sorted_by_size[wanted_index][3] = True
+                    final_order.append(all_data_sorted_by_size[wanted_index])
+    return final_order
+    
     
 all_data = generate_all_dummy_data()
 #indexes_of_table_group(all_data, 2)
-all_data_sorted_by_size =  sort_data_by_table_company_size(all_data)                   
+all_data_sorted_by_size =  sort_data_by_table_company_size(all_data)
+final_table = create_final_order_table(all_data_sorted_by_size)
+for a in range(0, len(all_data_sorted_by_size[95][1])):
+    print(a)
+                  
 # ACTUAL DATA PREPROCESSING
 
 column_names = ["name", "gender", "friends"]
