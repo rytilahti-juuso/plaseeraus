@@ -97,12 +97,24 @@ def create_list_to_find_correct_index(all_data_sorted_by_size):
     for i in range(len(all_data_sorted_by_size)):
         find_correct_index_list.append(all_data_sorted_by_size[i][0])
     return find_correct_index_list    
+
+# before going sorted by size
+def validate_that_desire_to_table_group_is_mutual():
+    pass
+
+# check if sits on correct gender_spot
+def check_gender_and_change_place(final_table):
+    for i in range(3, len(final_table)-3):
+        
     
+#def main():    
 all_data = generate_all_dummy_data()
 #indexes_of_table_group(all_data, 2)
 all_data_sorted_by_size =  sort_data_by_table_company_size(all_data)
 list_to_find_index = create_list_to_find_correct_index(all_data_sorted_by_size)
 final_table = create_final_order_table(all_data_sorted_by_size, list_to_find_index)
+
+
 
 # ACTUAL DATA PREPROCESSING
 
