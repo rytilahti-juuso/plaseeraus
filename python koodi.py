@@ -6,8 +6,45 @@ import pandas as pd
 import numpy as np
 import re
 import os
-
+import random
 os.chdir(r'C:\Users\The Risk Chief\Documents\GitHub\plaseeraus')
+
+
+
+# Generate dummy table group
+def generate_table_group(dummy_participant_count):
+    table_group= []
+    probability = random.randint(0,9)
+    print(probability)
+    if(probability >=4):
+        table_group.append(random.randint(0,dummy_participant_count))
+        if(probability >=6):
+            table_group.append(random.randint(0,dummy_participant_count))
+            if(probability>=9):
+                table_group.append(random.randint(0,dummy_participant_count))
+    return table_group
+
+
+def generate_all_dummy_data():    
+    all_data = []
+    dummy_participant_count = 100
+    for i in range(dummy_participant_count):
+    #    data for single person stored in array
+        person_data = []        
+        person_data.append(i)
+    #    people wanted in the same table group
+        table_group = generate_table_group(dummy_participant_count)
+        person_data.append(table_group)
+    #    persons gender
+        person_data.append(random.randint(0,1))
+        all_data.append(person_data)
+        print(i)
+    return all_data
+
+all_data = generate_all_dummy_data()
+
+                    
+# ACTUAL DATA PREPROCESSING
 
 column_names = ["name", "gender", "friends"]
 train_data = pd.read_csv('plase.txt', delimiter= "\t", names = column_names)
@@ -26,13 +63,16 @@ for i in range(len(names)):
     friends_filled[i] = re.sub(r'[\,]+\s', ',', friends_filled[i])
     friends_filled[i] = re.sub(r'^\s','', friends_filled[i])
 
- 
+# Convert the names into integers
 tokenizer = Tokenizer(split=",")
 tokenizer.fit_on_texts(names)
-sequences = tokenizer.texts_to_sequences(names)
+sequences = tokenizer.texts_to_sequences(friends_filled)
 
+# get word -> integer mapping
 word2idx = tokenizer.word_index
 print('Found %s unique tokens.' % len(word2idx))
+
+
 
 # Text preprocessing
 
