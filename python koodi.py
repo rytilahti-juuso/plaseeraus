@@ -15,7 +15,7 @@ os.chdir(r'C:\Users\The Risk Chief\Documents\GitHub\plaseeraus')
 def generate_table_group(dummy_participant_count):
     table_group= []
     probability = random.randint(0,9)
-    print(probability)
+#    print(probability)
     if(probability >=4):
         table_group.append(random.randint(0,dummy_participant_count))
         if(probability >=6):
@@ -24,7 +24,7 @@ def generate_table_group(dummy_participant_count):
                 table_group.append(random.randint(0,dummy_participant_count))
     return table_group
 
-
+# one element contains(name, table_group, gender)
 def generate_all_dummy_data():    
     all_data = []
     dummy_participant_count = 100
@@ -40,9 +40,17 @@ def generate_all_dummy_data():
         all_data.append(person_data)
         print(i)
     return all_data
+    
+# Needs size of wanted table company + man itself
+def indexes_of_table_group(all_data, size_of_table_group):    
+    items_indexes = []
+    for i in range(0, len(all_data)):
+        if(len(all_data[i][1])== size_of_table_group-1):
+            items_indexes.append(i)
+    return items_indexes 
 
 all_data = generate_all_dummy_data()
-
+indexes_of_table_group(all_data, 0)
                     
 # ACTUAL DATA PREPROCESSING
 
