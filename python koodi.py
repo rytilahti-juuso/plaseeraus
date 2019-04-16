@@ -27,13 +27,13 @@ def generate_table_group(dummy_participant_count):
 # one element contains(name, table_group, gender, boolean isAlreadySorted)
 def generate_all_dummy_data():    
     all_data = []
-    dummy_participant_count = 100
+    dummy_participant_count = 20
     for i in range(dummy_participant_count):
     #    data for single person stored in array
         person_data = []        
         person_data.append(i)
     #    people wanted in the same table group
-        table_group = generate_table_group(dummy_participant_count)
+        table_group = generate_table_group(dummy_participant_count-1)
         person_data.append(table_group)
     #    persons gender
         person_data.append(random.randint(0,1))
@@ -82,7 +82,7 @@ def create_final_order_table(all_data_sorted_by_size, list_to_find_index):
     #            Go through wanted table company
             for a in range(0, len(all_data_sorted_by_size[i][1])):
                 wanted_index = all_data_sorted_by_size[i][1][a]
-                print("this is wanted index", wanted_index, all_data_sorted_by_size[wanted_index][3])
+#                print("this is wanted index", wanted_index, all_data_sorted_by_size[wanted_index][3])
                 wanted_index = list_to_find_index.index(wanted_index)
                 if(all_data_sorted_by_size[wanted_index][3] == False):    
                     all_data_sorted_by_size[wanted_index][3] = True
