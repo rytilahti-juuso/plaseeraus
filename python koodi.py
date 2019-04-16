@@ -70,30 +70,40 @@ def sort_data_by_table_company_size(all_data):
         all_data_sorted.append(all_data[group_of_1[i]])
     return all_data_sorted
 
-def create_final_order_table(all_data_sorted_by_size):
+def create_final_order_table(all_data_sorted_by_size, list_to_find_index):
     final_order = []
     for i in range(0, len(all_data_sorted_by_size)):
         if(all_data_sorted_by_size[i][3] == False):
             final_order.append(all_data_sorted_by_size[i])
+            print(all_data_sorted_by_size[i])
             all_data_sorted_by_size[i][3] = True
 #            print("lol")
-            if(all_data_sorted_by_size[i][1]):
+#            if(all_data_sorted_by_size[i][1]):
     #            Go through wanted table company
-                for a in range(0, len(all_data_sorted_by_size[i][1])):
-                    wanted_index = all_data_sorted_by_size[i][1][a]
-                    print("this is inside for loop", wanted_index) 
+            for a in range(0, len(all_data_sorted_by_size[i][1])):
+                wanted_index = all_data_sorted_by_size[i][1][a]
+                print("this is wanted index", wanted_index, all_data_sorted_by_size[wanted_index][3])
+                wanted_index = list_to_find_index.index(wanted_index)
+                if(all_data_sorted_by_size[wanted_index][3] == False):    
                     all_data_sorted_by_size[wanted_index][3] = True
-                    final_order.append(all_data_sorted_by_size[wanted_index])
+                    list_item = all_data_sorted_by_size[wanted_index]
+                    print("this is list item", list_item)
+                    final_order.append(list_item)
+#                    print("This is final order", final_order)
     return final_order
     
+def create_list_to_find_correct_index(all_data_sorted_by_size):        
+    find_correct_index_list = []
+    for i in range(len(all_data_sorted_by_size)):
+        find_correct_index_list.append(all_data_sorted_by_size[i][0])
+    return find_correct_index_list    
     
 all_data = generate_all_dummy_data()
 #indexes_of_table_group(all_data, 2)
 all_data_sorted_by_size =  sort_data_by_table_company_size(all_data)
-final_table = create_final_order_table(all_data_sorted_by_size)
-for a in range(0, len(all_data_sorted_by_size[95][1])):
-    print(a)
-                  
+list_to_find_index = create_list_to_find_correct_index(all_data_sorted_by_size)
+final_table = create_final_order_table(all_data_sorted_by_size, list_to_find_index)
+
 # ACTUAL DATA PREPROCESSING
 
 column_names = ["name", "gender", "friends"]
