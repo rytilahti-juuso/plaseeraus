@@ -49,9 +49,25 @@ def indexes_of_table_group(all_data, size_of_table_group):
             items_indexes.append(i)
     return items_indexes 
 
+def sort_data_by_table_company_size(all_data):
+    all_data_sorted = []
+    group_of_4 =  indexes_of_table_group(all_data, 4)
+    group_of_3 = indexes_of_table_group(all_data, 3)
+    group_of_2 = indexes_of_table_group(all_data, 2)
+    group_of_1 = indexes_of_table_group(all_data, 1)
+    for i in range(len(group_of_4)):
+        all_data_sorted.append(all_data[group_of_4[i]])
+    for i in range(len(group_of_3)):
+        all_data_sorted.append(all_data[group_of_3[i]])
+    for i in range(len(group_of_2)):
+        all_data_sorted.append(all_data[group_of_2[i]])
+    for i in range(len(group_of_1)):
+        all_data_sorted.append(all_data[group_of_1[i]])
+    return all_data_sorted
+    
 all_data = generate_all_dummy_data()
-indexes_of_table_group(all_data, 0)
-                    
+#indexes_of_table_group(all_data, 2)
+all_data_sorted_by_size =  sort_data_by_table_company_size(all_data)                   
 # ACTUAL DATA PREPROCESSING
 
 column_names = ["name", "gender", "friends"]
