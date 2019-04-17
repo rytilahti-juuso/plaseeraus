@@ -106,14 +106,30 @@ def validate_that_desire_to_table_group_is_mutual():
     pass
 
 # check if sits on correct gender_spot
-def check_gender_and_change_place(final_table):
-    for i in range(4, (len(final_table))-3):
-        if(len(final_table[i][1])==3):
-            print(final_table[i])
-            for a in range(i,(i+3)):
-                print(final_table[i])
-                i+=1
-            print("final",final_table[i])
+def check_gender_and_change_place(table):
+    for i in range(3, (len(final_table)-3)):
+#        TODO: special cases like index 0 and last index handling
+#        if(i%2==0 and i!=0):
+#        Checks if gender on the other side of table is same gender
+        if(table[i][2] ==table [i+2][2]):
+#            to left side of the table
+            if(i%2==0):                
+                if(table[i][2] != table[i-1][2]):
+                    print("before change table[i] is:", table[i])
+                    print("before change table[-1] is:", table[i-1])
+                    temp = table[i-1]
+                    table[i-1] = table[i]
+                    table[i] = temp
+                    print("after change table[i] is:", table[i])
+                    print("after change table[-1] is:", table[i-1])
+                if(table[i][2] != table[i+3][2]):
+                    print("before change table[i] is:", table[i])
+                    print("before change table[-1] is:", table[i+3])
+                    temp = table[i+3]
+                    table[i-3] = table[i]
+                    table[i] = temp
+                    print("after change table[i] is:", table[i])
+                    print("after change table[-1] is:", table[i+3])
             
             
         
