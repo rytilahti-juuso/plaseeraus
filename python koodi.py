@@ -16,11 +16,11 @@ def generate_table_group(dummy_participant_count):
     table_group= []
     probability = random.randint(0,9)
 #    print(probability)
-    if(probability >=4):
+    if(probability >=2):
         table_group.append(random.randint(0,dummy_participant_count))
-        if(probability >=6):
+        if(probability >=4):
             table_group.append(random.randint(0,dummy_participant_count))
-            if(probability>=9):
+            if(probability>=6):
                 table_group.append(random.randint(0,dummy_participant_count))
     return table_group
 
@@ -107,7 +107,15 @@ def validate_that_desire_to_table_group_is_mutual():
 
 # check if sits on correct gender_spot
 def check_gender_and_change_place(final_table):
-    for i in range(3, len(final_table)-3):
+    for i in range(4, (len(final_table))-3):
+        if(len(final_table[i][1])==3):
+            print(final_table[i])
+            for a in range(i,(i+3)):
+                print(final_table[i])
+                i+=1
+            print("final",final_table[i])
+            
+            
         
     
 #def main():    
