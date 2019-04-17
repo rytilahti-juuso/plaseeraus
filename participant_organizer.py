@@ -6,7 +6,7 @@ os.chdir(r'C:\Users\The Risk Chief\Documents\GitHub\plaseeraus')
 
 
 # Generate dummy table group
-def generate_table_group(dummy_participant_count):
+def generate_table_group(dummy_participant_count, i):
     table_group= []
     probability = random.randint(0,9)
 #    print(probability)
@@ -16,6 +16,8 @@ def generate_table_group(dummy_participant_count):
             table_group.append(random.randint(0,dummy_participant_count))
             if(probability>=6):
                 table_group.append(random.randint(0,dummy_participant_count))
+    if i in table_group:
+            table_group.remove(i)
     return table_group
 
 # one element contains(name, table_group, gender, boolean isAlreadySorted)
@@ -26,7 +28,7 @@ def generate_all_dummy_data(dummy_participant_count):
         person_data = []        
         person_data.append(i)
     #    people wanted in the same table group
-        table_group = generate_table_group(dummy_participant_count-1)
+        table_group = generate_table_group(dummy_participant_count-1, i)
         person_data.append(table_group)
     #    persons gender
         person_data.append(random.randint(0,1))
@@ -34,8 +36,20 @@ def generate_all_dummy_data(dummy_participant_count):
         all_data.append(person_data)
         print(i)
     return all_data
+
+#    Doesnt work yet
+def generate_dummy_data_wanted_table_group_to_identical(table):
+    final_order = []
+    for i in range(0,len(table)):
+        table_company = table[i][1]
+        print(table_company)
+        if table[i][0] in table_company:
+            table_company.remove(table[i][0])
+            print("removed")
+        
+        
     
-# Needs size of wanted table company + man itself
+# Needs size of total table company
 def indexes_of_table_group(all_data, size_of_table_group):    
     items_indexes = []
     for i in range(0, len(all_data)):
@@ -144,6 +158,9 @@ all_data = generate_all_dummy_data(100)
 #indexes_of_table_group(all_data, 2)
 all_data_sorted_by_size =  sort_data_by_table_company_size(all_data)
 list_to_find_index = create_list_to_find_correct_index(all_data_sorted_by_size)
+
+generate_dummy_data_wanted_table_group_to_identical(all_data_sorted_by_size)
+
 final_table = create_final_order_table(all_data_sorted_by_size, list_to_find_index)
 final_table_after_checking = check_gender_and_change_place(final_table)
 table1 = create_two_dimensional_list_from_genders(final_table)
