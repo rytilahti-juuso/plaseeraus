@@ -130,8 +130,24 @@ def check_gender_and_change_place(table):
                     table[i] = temp
                     print("after change table[i] is:", table[i])
                     print("after change table[-1] is:", table[i+3])
-            
-            
+            if(i%2==1):
+                if(table[i][2] != table[i-3][2]):
+                    print("before change table[i] is:", table[i])
+                    print("before change table[-1] is:", table[i-3])
+                    temp = table[i-3]
+                    table[i-3] = table[i]
+                    table[i] = temp
+                    print("after change table[i] is:", table[i])
+                    print("after change table[-1] is:", table[i-3])
+                if(table[i][2] != table[i+1][2]):
+                    print("before change table[i] is:", table[i])
+                    print("before change table[-1] is:", table[i+1])
+                    temp = table[i+1]
+                    table[i+1] = table[i]
+                    table[i] = temp
+                    print("after change table[i] is:", table[i])
+                    print("after change table[-1] is:", table[i+1])
+                
         
     
 #def main():    
