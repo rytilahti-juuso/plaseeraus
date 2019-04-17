@@ -106,49 +106,32 @@ def validate_that_desire_to_table_group_is_mutual():
     pass
 
 # check if sits on correct gender_spot
+# NOTE: sequence is -3 +1 in odd index and -1 +3 in even numbers
 def check_gender_and_change_place(table):
     for i in range(3, (len(final_table)-3)):
 #        TODO: special cases like index 0 and last index handling
 #        if(i%2==0 and i!=0):
-#        Checks if gender on the other side of table is same gender
+#        Checks if gender on the right side of table on even index numbers is same gender and on the odd numbers the participant left side is same gender
+#       If same gender, do swap
         if(table[i][2] ==table [i+2][2]):
-#            to left side of the table
-            if(i%2==0):                
-                if(table[i][2] != table[i-1][2]):
-                    print("before change table[i] is:", table[i])
-                    print("before change table[-1] is:", table[i-1])
-                    temp = table[i-1]
-                    table[i-1] = table[i]
-                    table[i] = temp
-                    print("after change table[i] is:", table[i])
-                    print("after change table[-1] is:", table[i-1])
-                if(table[i][2] != table[i+3][2]):
-                    print("before change table[i] is:", table[i])
-                    print("before change table[-1] is:", table[i+3])
-                    temp = table[i+3]
-                    table[i-3] = table[i]
-                    table[i] = temp
-                    print("after change table[i] is:", table[i])
-                    print("after change table[-1] is:", table[i+3])
+            if(i%2==0):
+                table= swap_places(table, i, -1)
+                table= swap_places(table, i, +3)                  
             if(i%2==1):
-                if(table[i][2] != table[i-3][2]):
-                    print("before change table[i] is:", table[i])
-                    print("before change table[-1] is:", table[i-3])
-                    temp = table[i-3]
-                    table[i-3] = table[i]
+                table= swap_places(table, i, -3)
+                table= swap_places(table, i, +1) 
+
+#swap places if the genders differ                
+def swap_places(table, i, wanted_change):
+    if(table[i][2] != table[i+wanted_change][2]):
+                    print("before change table[",i,"] is:", table[i])
+                    print("before change table[", i+wanted_change,"] is:", table[i+wanted_change])
+                    temp = table[i+wanted_change]
+                    table[i+wanted_change] = table[i]
                     table[i] = temp
-                    print("after change table[i] is:", table[i])
-                    print("after change table[-1] is:", table[i-3])
-                if(table[i][2] != table[i+1][2]):
-                    print("before change table[i] is:", table[i])
-                    print("before change table[-1] is:", table[i+1])
-                    temp = table[i+1]
-                    table[i+1] = table[i]
-                    table[i] = temp
-                    print("after change table[i] is:", table[i])
-                    print("after change table[-1] is:", table[i+1])
-                
-        
+                    print("After change table[",i,"] is:", table[i])
+                    print("After change table[", i+wanted_change,"] is:", table[i+wanted_change])               
+    return table
     
 #def main():    
 all_data = generate_all_dummy_data()
