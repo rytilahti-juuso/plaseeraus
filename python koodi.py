@@ -77,23 +77,12 @@ def create_final_order_table(all_data_sorted_by_size, list_to_find_index):
             final_order.append(all_data_sorted_by_size[i])
             print(all_data_sorted_by_size[i])
             all_data_sorted_by_size[i][3] = True
-#            print("lol")
-#            if(all_data_sorted_by_size[i][1]):
     #            Go through wanted table company
             final_order = loop_through_wanted_table_company(all_data_sorted_by_size[i][1], final_order)
-#            for a in range(0, len(all_data_sorted_by_size[i][1])):
-#                wanted_index = all_data_sorted_by_size[i][1][a]
-##                print("this is wanted index", wanted_index, all_data_sorted_by_size[wanted_index][3])
-#                wanted_index = list_to_find_index.index(wanted_index)
-#                if(all_data_sorted_by_size[wanted_index][3] == False):    
-#                    all_data_sorted_by_size[wanted_index][3] = True
-#                    list_item = all_data_sorted_by_size[wanted_index]
-#                    print("this is list item", list_item)
-#                    final_order.append(list_item)
-##                    print("This is final order", final_order)
     return final_order
 
 #    Loops through wanted table company
+#returns appended final_order
 def loop_through_wanted_table_company(table_company, final_order):
     for a in range(0, len(table_company)):
                 wanted_index = table_company[a]
@@ -130,61 +119,7 @@ final_table = create_final_order_table(all_data_sorted_by_size, list_to_find_ind
 
 
 
-# ACTUAL DATA PREPROCESSING
-
-column_names = ["name", "gender", "friends"]
-train_data = pd.read_csv('plase.txt', delimiter= "\t", names = column_names)
-friends_filled = train_data['friends'].fillna("Dummy_Value").values
-names = train_data['name'].fillna("Dummy_Value").values
-
-plase_score = []
-for i in range(len(names)):
-    print(i)
-    plase_score.append(100)
-#    boy girl boy girls score affecting
-    if(i%2 == 0):
-        if(train_data["gender"][i]== 0):
-            plase_score[i] = plase_score[i]-20
-    friends_filled[i] = friends_filled[i].lower()
-    friends_filled[i] = re.sub(r'[\,]+\s', ',', friends_filled[i])
-    friends_filled[i] = re.sub(r'^\s','', friends_filled[i])
-
-# Convert the names into integers
-tokenizer = Tokenizer(split=",")
-tokenizer.fit_on_texts(names)
-sequences = tokenizer.texts_to_sequences(friends_filled)
-
-# get word -> integer mapping
-word2idx = tokenizer.word_index
-print('Found %s unique tokens.' % len(word2idx))
 
 
 
-# Text preprocessing
 
-#persons = ['Matti meikälainen, Kossu Koskenkorce, Eppu Normaali']
-persons = [['Matti meikälainen, Kossu Koskenkorce, Eppu Normaali'], ["Ville Virtanen, Riski Asteriski,"], ["Riski Asteriski"]]
-
-
-# Using numpy, if you use numpy, you can flatten numpy array with flatten() for tokenizer
-#list_of_all_persons = persons.flatten()
-
-# Using itertools.chain to flatten 2d list to 1d
-list_of_all_persons = list(chain.from_iterable(persons))
-
-# Text Cleaning
-for i in range(len(list_of_all_persons)):
-    print(i)
-    list_of_all_persons[i] = list_of_all_persons[i].lower()
-    list_of_all_persons[i] = re.sub(r'[\,]+\s', ',', list_of_all_persons[i])
-    list_of_all_persons[i] = re.sub(r'^\s','', list_of_all_persons[i])
-    print(list_of_all_persons[i])
-
-# Convert the names into integers
-tokenizer = Tokenizer(split= ',')
-tokenizer.fit_on_texts(list_of_all_persons)
-sequences = tokenizer.texts_to_sequences(list_of_all_persons)
-
-# get word -> integer mapping
-word2idx = tokenizer.word_index
-print('Found %s unique tokens.' % len(word2idx))
