@@ -80,8 +80,23 @@ def create_final_order_table(all_data_sorted_by_size, list_to_find_index):
 #            print("lol")
 #            if(all_data_sorted_by_size[i][1]):
     #            Go through wanted table company
-            for a in range(0, len(all_data_sorted_by_size[i][1])):
-                wanted_index = all_data_sorted_by_size[i][1][a]
+            final_order = loop_through_wanted_table_company(all_data_sorted_by_size[i][1], final_order)
+#            for a in range(0, len(all_data_sorted_by_size[i][1])):
+#                wanted_index = all_data_sorted_by_size[i][1][a]
+##                print("this is wanted index", wanted_index, all_data_sorted_by_size[wanted_index][3])
+#                wanted_index = list_to_find_index.index(wanted_index)
+#                if(all_data_sorted_by_size[wanted_index][3] == False):    
+#                    all_data_sorted_by_size[wanted_index][3] = True
+#                    list_item = all_data_sorted_by_size[wanted_index]
+#                    print("this is list item", list_item)
+#                    final_order.append(list_item)
+##                    print("This is final order", final_order)
+    return final_order
+
+#    Loops through wanted table company
+def loop_through_wanted_table_company(table_company, final_order):
+    for a in range(0, len(table_company)):
+                wanted_index = table_company[a]
 #                print("this is wanted index", wanted_index, all_data_sorted_by_size[wanted_index][3])
                 wanted_index = list_to_find_index.index(wanted_index)
                 if(all_data_sorted_by_size[wanted_index][3] == False):    
@@ -89,7 +104,6 @@ def create_final_order_table(all_data_sorted_by_size, list_to_find_index):
                     list_item = all_data_sorted_by_size[wanted_index]
                     print("this is list item", list_item)
                     final_order.append(list_item)
-#                    print("This is final order", final_order)
     return final_order
     
 def create_list_to_find_correct_index(all_data_sorted_by_size):        
