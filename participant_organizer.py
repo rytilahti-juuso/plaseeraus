@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-
-from keras.preprocessing.text import Tokenizer
-from itertools import chain
-import pandas as pd
-import numpy as np
-import re
 import os
 import random
 os.chdir(r'C:\Users\The Risk Chief\Documents\GitHub\plaseeraus')
@@ -25,9 +19,8 @@ def generate_table_group(dummy_participant_count):
     return table_group
 
 # one element contains(name, table_group, gender, boolean isAlreadySorted)
-def generate_all_dummy_data():    
+def generate_all_dummy_data(dummy_participant_count):    
     all_data = []
-    dummy_participant_count = 20
     for i in range(dummy_participant_count):
     #    data for single person stored in array
         person_data = []        
@@ -79,6 +72,8 @@ def create_final_order_table(all_data_sorted_by_size, list_to_find_index):
             all_data_sorted_by_size[i][3] = True
     #            Go through wanted table company
             final_order = loop_through_wanted_table_company(all_data_sorted_by_size[i][1], final_order)
+#    may have to be changed later to keep people in the same table company together
+#    final_order = check_gender_and_change_place(final_order)
     return final_order
 
 #    Loops through wanted table company
@@ -108,39 +103,51 @@ def validate_that_desire_to_table_group_is_mutual():
 # check if sits on correct gender_spot
 # NOTE: sequence is -3 +1 in odd index and -1 +3 in even numbers
 def check_gender_and_change_place(table):
-    for i in range(3, (len(final_table)-3)):
+    for i in range(3, (len(table)-3)):
 #        TODO: special cases like index 0 and last index handling
 #        if(i%2==0 and i!=0):
 #        Checks if gender on the right side of table on even index numbers is same gender and on the odd numbers the participant left side is same gender
 #       If same gender, do swap
         if(table[i][2] ==table [i+2][2]):
             if(i%2==0):
+                table= swap_places(table, i, +3) 
                 table= swap_places(table, i, -1)
-                table= swap_places(table, i, +3)                  
+                                 
             if(i%2==1):
                 table= swap_places(table, i, -3)
-                table= swap_places(table, i, +1) 
+                table= swap_places(table, i, +1)
+    return table
 
 #swap places if the genders differ                
 def swap_places(table, i, wanted_change):
     if(table[i][2] != table[i+wanted_change][2]):
-                    print("before change table[",i,"] is:", table[i])
-                    print("before change table[", i+wanted_change,"] is:", table[i+wanted_change])
+#                    print("before change table[",i,"] is:", table[i])
+#                    print("before change table[", i+wanted_change,"] is:", table[i+wanted_change])
                     temp = table[i+wanted_change]
                     table[i+wanted_change] = table[i]
                     table[i] = temp
-                    print("After change table[",i,"] is:", table[i])
-                    print("After change table[", i+wanted_change,"] is:", table[i+wanted_change])               
+#                    print("After change table[",i,"] is:", table[i])
+#                    print("After change table[", i+wanted_change,"] is:", table[i+wanted_change])               
     return table
-    
+
+def create_two_dimensional_list_from_genders(table):
+    genders_order_in_table = []
+    for i in range(0, len(table)):
+        if(i%2 == 0):     
+            groups_of_two = []
+        groups_of_two.append(table[i][2])
+        if(len(groups_of_two) == 2):    
+            genders_order_in_table.append(groups_of_two)
+    return genders_order_in_table
 #def main():    
-all_data = generate_all_dummy_data()
+all_data = generate_all_dummy_data(100)
 #indexes_of_table_group(all_data, 2)
 all_data_sorted_by_size =  sort_data_by_table_company_size(all_data)
 list_to_find_index = create_list_to_find_correct_index(all_data_sorted_by_size)
 final_table = create_final_order_table(all_data_sorted_by_size, list_to_find_index)
-
-
+final_table_after_checking = check_gender_and_change_place(final_table)
+table1 = create_two_dimensional_list_from_genders(final_table)
+table2 = create_two_dimensional_list_from_genders(final_table_after_checking)
 
 
 
