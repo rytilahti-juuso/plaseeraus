@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # -*- coding: utf-8 -*-
-# Based loosely here: https://github.com/gmichaelson/GA_in_python , https://www.youtube.com/watch?v=uCXm6avugCo and here: https://medium.com/@becmjo/genetic-algorithms-and-the-travelling-salesman-problem-d10d1daf96a1
+# Based loosely here: https://github.com/gmichaelson/GA_in_python , https://www.youtube.com/watch?v=uCXm6avugCo and here: https://towardsdatascience.com/evolution-of-a-salesman-a-complete-genetic-algorithm-tutorial-for-python-6fe5d2b3ca35
 import os
 # since i run code in spyder, i use os.chdir to quickly change the working directory
 os.chdir(r'C:\Users\The Risk Chief\Documents\GitHub\examples\genetic_algorithm')
@@ -113,7 +113,7 @@ def pick_mate(scores):
             
             return i
     
-def main():
+#def main():
     
 # parameters
 sparseness_of_map = 0.95
