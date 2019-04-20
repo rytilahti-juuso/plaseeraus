@@ -21,7 +21,7 @@ def initialize(p_zero, N):
     return score_table
                     
 def create_starting_population(size, score_table):
-#    This just creates a population of different routes of a fixed size. Pretty straightforward
+#    This just creates a population of different sitting_orders of a fixed size. Pretty straightforward
 
     population = []
     
@@ -30,14 +30,14 @@ def create_starting_population(size, score_table):
         
     return population
 
-def fitness(route, score_table):
+def fitness(sitting_order, score_table):
     score = 0
-    for i in range(1, len(route)):
-        if (score_table[route[i-1]][route[i]] == 0) and i != len(score_table)-1:
-            print("WARNING: INVALID ROUTE")
-            print(route)
+    for i in range(1, len(sitting_order)):
+        if (score_table[sitting_order[i-1]][sitting_order[i]] == 0) and i != len(score_table)-1:
+            print("WARNING: INVALID sitting_order")
+            print(sitting_order)
             print(score_table)
-        score = score + score_table[route[i-1]][route[i]]
+        score = score + score_table[sitting_order[i-1]][sitting_order[i]]
     return score
 
 def crossover(a, b):
@@ -62,24 +62,24 @@ def crossover(a, b):
     return child       
 #    return (new_a, new_b)
 
-def mutate(route, probability, score_table):
+def mutate(sitting_order, probability, score_table):
        
-    for i in range(len(route)):
+    for i in range(len(sitting_order)):
         if(random.random() < probability):
-            swap_with = int(random.random()*len(route))
-            city1 = route[i]
-            city2 = route[swap_with]
+            swap_with = int(random.random()*len(sitting_order))
+            city1 = sitting_order[i]
+            city2 = sitting_order[swap_with]
             
-            route[i] = city2
-            route[swap_with] = city1
+            sitting_order[i] = city2
+            sitting_order[swap_with] = city1
             
-    return new_route
+    return new_sitting_order
 
 #   Creates a new member
 def create_new_member(score_table):    
-    route = np.random.choice(len(score_table), len(score_table), replace=False)
-#    print(route)
-    return route
+    sitting_order = np.random.choice(len(score_table), len(score_table), replace=False)
+#    print(sitting_order)
+    return sitting_order
 
 def score_population(population, score_table):
     
@@ -153,9 +153,9 @@ for i in range(0,number_of_iterations):
     
     # allow members of the population to breed
     for j in range(0, number_of_couples):  
-#        new_route = crossover(population[0], population[17])
-        new_route = crossover(population[pick_mate(scores)], population[pick_mate(scores)])
-        new_population.append(new_route)
+#        new_sitting_order = crossover(population[0], population[17])
+        new_sitting_order = crossover(population[pick_mate(scores)], population[pick_mate(scores)])
+        new_population.append(new_sitting_order)
   
     # mutate
     for j in range(0, len(new_population)):
