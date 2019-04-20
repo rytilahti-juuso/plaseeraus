@@ -42,10 +42,16 @@ def generate_dummy_data_wanted_table_group_to_identical(table):
     final_order = []
     for i in range(0,len(table)):
         table_company = table[i][1]
-        print(table_company)
-        if table[i][0] in table_company:
-            table_company.remove(table[i][0])
-            print("removed")
+    for a in range(0, len(table_company)):
+                    wanted_index = table_company[a]
+    #                print("this is wanted index", wanted_index, all_data_sorted_by_size[wanted_index][3])
+                    wanted_index = list_to_find_index.index(wanted_index)
+                    if(all_data_sorted_by_size[wanted_index][3] == False):    
+                        all_data_sorted_by_size[wanted_index][3] = True
+                        list_item = all_data_sorted_by_size[wanted_index]
+                        print("this is list item", list_item)
+                        final_order.append(list_item)
+    return final_order
         
         
     
@@ -85,14 +91,14 @@ def create_final_order_table(all_data_sorted_by_size, list_to_find_index):
             print(all_data_sorted_by_size[i])
             all_data_sorted_by_size[i][3] = True
     #            Go through wanted table company
-            final_order = loop_through_wanted_table_company(all_data_sorted_by_size[i][1], final_order)
+            final_order = loop_through_wanted_table_company(all_data_sorted_by_size[i][1], final_order, i)
 #    may have to be changed later to keep people in the same table company together
 #    final_order = check_gender_and_change_place(final_order)
     return final_order
 
 #    Loops through wanted table company
 #returns appended final_order
-def loop_through_wanted_table_company(table_company, final_order):
+def loop_through_wanted_table_company(table_company, final_order, i):
     for a in range(0, len(table_company)):
                 wanted_index = table_company[a]
 #                print("this is wanted index", wanted_index, all_data_sorted_by_size[wanted_index][3])
@@ -159,7 +165,7 @@ all_data = generate_all_dummy_data(100)
 all_data_sorted_by_size =  sort_data_by_table_company_size(all_data)
 list_to_find_index = create_list_to_find_correct_index(all_data_sorted_by_size)
 
-generate_dummy_data_wanted_table_group_to_identical(all_data_sorted_by_size)
+#lol = generate_dummy_data_wanted_table_group_to_identical(all_data_sorted_by_size)
 
 final_table = create_final_order_table(all_data_sorted_by_size, list_to_find_index)
 final_table_after_checking = check_gender_and_change_place(final_table)
