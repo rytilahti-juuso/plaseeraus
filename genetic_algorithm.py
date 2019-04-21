@@ -77,11 +77,19 @@ def validate_that_desire_to_table_group_is_mutual(score_table):
     return verified_mutual_table_groups
 
 # remove duplicates rom mutual table groups
-def mutual_table_groups(mutual_table_groups):
-            for i in range(0, len(mutual_table_groups)):
-                for j in range(1, len(mutual_table_groups)):
-#                if(mutual_table_groups[i][0] == mutual_table_groups[i][1])
-    
+def remove_duplicates_from_mutual_table_groups(mutual_table_groups):
+    to_be_removed = []
+    for i in range(0, len(mutual_table_groups)):
+        if(len(mutual_table_groups) > 1):                
+            for j in range(1, len(mutual_table_groups)):
+                if(mutual_table_groups[i][0] == mutual_table_groups[j][1] and mutual_table_groups[i][1] == mutual_table_groups[j][0] and mutual_table_groups[j] not in to_be_removed):
+                    print(mutual_table_groups[i])                
+                    to_be_removed.append(mutual_table_groups[i])
+#                    mutual_table_groups.remove(mutual_table_groups[i])
+    for i in range(len(to_be_removed)):
+        mutual_table_groups.remove(to_be_removed[i])
+    return mutual_table_groups
+
 def initialize(p_zero, N):
 
     score_table = np.zeros((N,N))
@@ -198,9 +206,11 @@ number_of_winners_to_keep = 2
 number_of_groups = 1
 
 #added from participant_organizer for testing purposes
-all_data = generate_all_dummy_data(10)
+all_data = generate_all_dummy_data(100)
 score_table = create_score_table(all_data)
-validate_that_desire_to_table_group_is_mutual(score_table)
+validated = validate_that_desire_to_table_group_is_mutual(score_table)
+remove_duplicates_from_mutual_table_groups(validated)
+
 # initialize the map and save it
 #score_table = initialize(0, size_of_map)
 # create the starting population
