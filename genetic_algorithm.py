@@ -63,11 +63,12 @@ def create_score_table(table_order):
 
 def validate_that_desire_to_table_group_is_mutual(score_table):
     N = len(score_table)
+    verified_mutual_table_groups = []
     new_table = []
     for i in range(N):
         for j in range(N):
-            if(score_table[j][i] == score_table[i][j] and score_table[j][i] >= 11):
-                new_table.append(j)  
+            if(score_table[j][i] == score_table[i][j] and score_table[j][i] >= 11 and j not in new_table):
+                new_table.append(j)
     return new_table
     
     
