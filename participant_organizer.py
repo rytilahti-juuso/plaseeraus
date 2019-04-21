@@ -162,14 +162,18 @@ def create_two_dimensional_list_from_genders(table):
             genders_order_in_table.append(groups_of_two)
     return genders_order_in_table
 
+    
+    
+
 # Score_table "rules":
 #    same gender: +=9
 #   different gender: +=10
-#   is on the friend list: +=2
+#   wished table company: +=2
 def create_score_table(table_order):
     N = len(table_order)
     score_table = np.zeros((N,N))
     for i in range(N):
+#        Add friend score
         for z in range(len(table_order[i][1])):
                 print(table_order[i][1][z])
                 wished_number = table_order[i][1][z]

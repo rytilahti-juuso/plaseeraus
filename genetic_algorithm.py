@@ -9,6 +9,68 @@ import random
 import copy
 import matplotlib.pyplot as plt
 
+def generate_table_group(dummy_participant_count, i):
+    table_group= []
+    probability = random.randint(0,9)
+#    print(probability)
+    if(probability >=2):
+        table_group.append(random.randint(0,dummy_participant_count))
+        if(probability >=4):
+            table_group.append(random.randint(0,dummy_participant_count))
+            if(probability>=6):
+                table_group.append(random.randint(0,dummy_participant_count))
+    if i in table_group:
+            table_group.remove(i)
+    return table_group
+
+# one element contains(name, table_group, gender, boolean isAlreadySorted)
+def generate_all_dummy_data(dummy_participant_count):    
+    all_data = []
+    for i in range(dummy_participant_count):
+    #    data for single person stored in array
+        person_data = []        
+        person_data.append(i)
+    #    people wanted in the same table group
+        table_group = generate_table_group(dummy_participant_count-1, i)
+        person_data.append(table_group)
+    #    persons gender
+        person_data.append(random.randint(0,1))
+        person_data.append(False)
+        all_data.append(person_data)
+        print(i)
+    return all_data
+    
+def create_score_table(table_order):
+    N = len(table_order)
+    score_table = np.zeros((N,N))
+    for i in range(N):
+#        Add friend score
+        for z in range(len(table_order[i][1])):
+                print(table_order[i][1][z])
+                wished_number = table_order[i][1][z]
+                score_table[i][wished_number] +=2
+        for j in range(N):
+                                    
+            if(i == j):
+                continue
+##            if different gender
+            if(table_order[j][2] != table_order[i][2]):
+                score_table[i][j] += 10
+            elif(table_order[j][2] == table_order[i][2]):
+                score_table[i][j] += 9
+
+    return score_table
+
+def validate_that_desire_to_table_group_is_mutual(score_table):
+    N = len(score_table)
+    new_table = []
+    for i in range(N):
+        for j in range(N):
+            if(score_table[j][i] == score_table[i][j] and score_table[j][i] >= 11):
+                new_table.append(j)  
+    return new_table
+    
+    
 def initialize(p_zero, N):
 
     score_table = np.zeros((N,N))
@@ -124,8 +186,12 @@ mutation_probability = 0.05
 number_of_winners_to_keep = 2
 number_of_groups = 1
 
+#added from participant_organizer for testing purposes
+all_data = generate_all_dummy_data(10)
+score_table = create_score_table(all_data)
+validate_that_desire_to_table_group_is_mutual(score_table)
 # initialize the map and save it
-score_table = initialize(0, size_of_map)
+#score_table = initialize(0, size_of_map)
 # create the starting population
 population = create_starting_population(population_size, score_table)
 
