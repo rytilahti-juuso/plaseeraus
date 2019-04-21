@@ -90,8 +90,20 @@ def remove_duplicates_from_mutual_table_groups(mutual_table_groups):
         mutual_table_groups.remove(to_be_removed[i])
     return mutual_table_groups
 
+def remove_not_mutual_table_group_wishes(table_groups_duplicates_removed, all_data):
+    for i in range(len(all_data)):
+        names_to_keep = []
+        for j in range(len(table_groups_duplicates_removed)):    
+            if(all_data[i][0] ==  table_groups_duplicates_removed[j][0] or all_data[i][0] ==  table_groups_duplicates_removed[j][1]):
+                for z in range(len(all_data[i][1])):
+                    if(all_data[i][1][z] in table_groups_duplicates_removed[j] ):
+                        names_to_keep.append(all_data[i][1][z])
+                all_data[i][1]= names_to_keep.copy()
+# After append them to single list
+def append_to_single_list():
+    pass
 
-    
+
 def initialize(p_zero, N):
 
     score_table = np.zeros((N,N))
