@@ -1,8 +1,16 @@
-Matti Meikalainen	0	Matti Meikalainen, Kossu Koskenkorce, Eppu Normaali
-Ville Virtanen	0	Ville Virtanen, Riski Asteriski
-Lol1	1	Ville Virtanen, Kossu Koskenkorce
-Lol2	1	asd
-Lol3	1	
-Lol4	1	Lol1
-gg1	0	gg2
-gg2	0	lol1
+Matti Meikalainen	0	Ville Virtanen, Riski Asteriski, Eppu Normaali
+Ville Virtanen	0	Matti meikalainen, Riski Asteriski, Eppu Normaali
+Riski Asteriski	0	Ville Virtanen, Matti Meikalainen, Eppu Normaali
+Eppu Normaali	0	Ville Virtanen, Matti Meikalainen, riski asteriski
+Lol1	1	lol2,lol3,lol4
+Lol2	0	lol3, lol1,lol4
+Lol3	1	lol1, lol2,lol4
+LOl4	0	lol1,lol2,lol3
+gg1	1	gg2
+gg2	0	gg2
+asd	1	asd2,asd3
+asd2	0	asd1,asd3
+asd3	1	asd1,asd2
+Pekka1	0	pekka2, pekka3
+pekka2	0	pekka1, pekka2
+pekka3	0	pekka2, pekka1	

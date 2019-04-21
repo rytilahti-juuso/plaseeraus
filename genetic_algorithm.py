@@ -90,6 +90,8 @@ def remove_duplicates_from_mutual_table_groups(mutual_table_groups):
         mutual_table_groups.remove(to_be_removed[i])
     return mutual_table_groups
 
+
+    
 def initialize(p_zero, N):
 
     score_table = np.zeros((N,N))
@@ -206,7 +208,7 @@ number_of_winners_to_keep = 2
 number_of_groups = 1
 
 #added from participant_organizer for testing purposes
-all_data = generate_all_dummy_data(100)
+all_data = generate_all_dummy_data(10)
 score_table = create_score_table(all_data)
 validated = validate_that_desire_to_table_group_is_mutual(score_table)
 remove_duplicates_from_mutual_table_groups(validated)

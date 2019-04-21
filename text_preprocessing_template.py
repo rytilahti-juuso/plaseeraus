@@ -2,6 +2,7 @@
 from keras.preprocessing.text import Tokenizer
 import pandas as pd
 import os
+import re
 os.chdir(r'C:\Users\The Risk Chief\Documents\GitHub\plaseeraus')
 # DATA PREPROCESSING
 
