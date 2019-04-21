@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-# -*- coding: utf-8 -*-
 # Based loosely here: https://github.com/gmichaelson/GA_in_python , https://www.youtube.com/watch?v=uCXm6avugCo and here: https://towardsdatascience.com/evolution-of-a-salesman-a-complete-genetic-algorithm-tutorial-for-python-6fe5d2b3ca35
 import os
-# since i run code in spyder, i use os.chdir to quickly change the working directory
+# since I run code in spyder, i use os.chdir to quickly change the working directory
 os.chdir(r'C:\Users\The Risk Chief\Documents\GitHub\examples\genetic_algorithm')
 
 import numpy as np
@@ -117,7 +116,7 @@ def pick_mate(scores):
     
 # parameters
 sparseness_of_map = 0.95
-size_of_map = 10
+size_of_map = 20
 population_size = 50
 number_of_iterations = 1000
 number_of_couples = 9
@@ -130,7 +129,7 @@ score_table = initialize(0, size_of_map)
 # create the starting population
 population = create_starting_population(population_size, score_table)
 
-last_distance = 1000000000
+last_distance = 0
 # for a large number of iterations do:
 best_of_alltime = population[0]    
 for i in range(0,number_of_iterations):

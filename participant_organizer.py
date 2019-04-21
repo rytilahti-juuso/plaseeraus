@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 import random
+import numpy as np
+# since I run code in spyder, i use os.chdir to quickly change the working directory
 os.chdir(r'C:\Users\The Risk Chief\Documents\GitHub\plaseeraus')
 
 
@@ -159,8 +161,33 @@ def create_two_dimensional_list_from_genders(table):
         if(len(groups_of_two) == 2):    
             genders_order_in_table.append(groups_of_two)
     return genders_order_in_table
+
+# Score_table "rules":
+#    same gender: +=9
+#   different gender: +=10
+#   is on the friend list: +=2
+def create_score_table(table_order):
+    N = len(table_order)
+    score_table = np.zeros((N,N))
+    for i in range(N):
+        for z in range(len(table_order[i][1])):
+                print(table_order[i][1][z])
+                wished_number = table_order[i][1][z]
+                score_table[i][wished_number] +=2
+        for j in range(N):
+                                    
+            if(i == j):
+                continue
+##            if different gender
+            if(table_order[j][2] != table_order[i][2]):
+                score_table[i][j] += 10
+            elif(table_order[j][2] == table_order[i][2]):
+                score_table[i][j] += 9
+
+    return score_table
+        
 #def main():    
-all_data = generate_all_dummy_data(100)
+all_data = generate_all_dummy_data(20)
 #indexes_of_table_group(all_data, 2)
 all_data_sorted_by_size =  sort_data_by_table_company_size(all_data)
 list_to_find_index = create_list_to_find_correct_index(all_data_sorted_by_size)
@@ -174,5 +201,6 @@ table2 = create_two_dimensional_list_from_genders(final_table_after_checking)
 
 
 
-
+for z in range(len(final_table[2][1])):
+    print(z)
 
