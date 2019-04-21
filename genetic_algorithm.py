@@ -61,16 +61,26 @@ def create_score_table(table_order):
 
     return score_table
 
+# returns index of persons which have mutual table_group wish
 def validate_that_desire_to_table_group_is_mutual(score_table):
     N = len(score_table)
     verified_mutual_table_groups = []
     new_table = []
     for i in range(N):
         for j in range(N):
-            if(score_table[j][i] == score_table[i][j] and score_table[j][i] >= 11 and j not in new_table):
+            if(score_table[j][i] == score_table[i][j] and score_table[j][i] >= 11):
+#                and j not in new_table
                 new_table.append(j)
-    return new_table
-    
+                new_table.append(i)
+                verified_mutual_table_groups.append(new_table)
+                new_table = []
+    return verified_mutual_table_groups
+
+# remove duplicates rom mutual table groups
+def mutual_table_groups(mutual_table_groups):
+            for i in range(0, len(mutual_table_groups)):
+                for j in range(1, len(mutual_table_groups)):
+#                if(mutual_table_groups[i][0] == mutual_table_groups[i][1])
     
 def initialize(p_zero, N):
 
