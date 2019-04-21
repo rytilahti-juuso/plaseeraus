@@ -90,15 +90,19 @@ def remove_duplicates_from_mutual_table_groups(mutual_table_groups):
         mutual_table_groups.remove(to_be_removed[i])
     return mutual_table_groups
 
-def remove_not_mutual_table_group_wishes(table_groups_duplicates_removed, all_data):
-    for i in range(len(all_data)):
+def remove_not_mutual_table_group_wishes(table_groups_duplicates_removed, cleaned_data):
+    cleaned_data = copy.deepcopy(cleaned_data)
+    for i in range(len(cleaned_data)):
         names_to_keep = []
         for j in range(len(table_groups_duplicates_removed)):    
-            if(all_data[i][0] ==  table_groups_duplicates_removed[j][0] or all_data[i][0] ==  table_groups_duplicates_removed[j][1]):
-                for z in range(len(all_data[i][1])):
-                    if(all_data[i][1][z] in table_groups_duplicates_removed[j] ):
-                        names_to_keep.append(all_data[i][1][z])
-                all_data[i][1]= names_to_keep.copy()
+            if(cleaned_data[i][0] ==  table_groups_duplicates_removed[j][0] or cleaned_data[i][0] ==  table_groups_duplicates_removed[j][1]):
+                for z in range(len(cleaned_data[i][1])):
+                    if(cleaned_data[i][1][z] in table_groups_duplicates_removed[j] ):
+                        names_to_keep.append(cleaned_data[i][1][z])
+                cleaned_data[i][1]= names_to_keep.copy()
+            else:
+                cleaned_data[i][1] = []
+    return cleaned_data
 # After append them to single list
 def append_to_single_list():
     pass
@@ -224,6 +228,7 @@ all_data = generate_all_dummy_data(10)
 score_table = create_score_table(all_data)
 validated = validate_that_desire_to_table_group_is_mutual(score_table)
 remove_duplicates_from_mutual_table_groups(validated)
+lol = remove_not_mutual_table_group_wishes(validated, all_data)
 
 # initialize the map and save it
 #score_table = initialize(0, size_of_map)
